@@ -101,17 +101,21 @@ class getEpisodeTranscripts:
             Get the content in plain text format. Can deserialize the object to get info
             in JSON format. That's a TODO
         """
-        txt = ""
+        info = []
         for scene in self.Info:
-            txt += "\n Scene :" + scene.scene_desc
-            txt += "\n Participants : "+ str([str(x) for x in scene.participants])
+            sc = {}
+            sc["Scene"] = scene.scene_desc
+            sc["Partcipiants"] = scene.participants
+            sc["Turns"] = []
             for c in scene.conversation_list:
-                txt += "\n Speaker : "+ c.speaker
-                txt += "\n Words : "+ str(c.words)
-                txt += "\n Recipients : "+ str(c.addresse)
-                txt += "\n"
-        with open("final_result.txt","w") as fh:
-            fh.write(txt)
+                turn = {}
+                turn["Speaker"] = c.speaker
+                turn["Words"] = c.words
+                turn["Recipients"] = c.addresse
+                sc["Turns"].append(turn)
+            info.append(sc)
+        with open("final.json","w") as fh:
+            json.dump(info,fh,indent=4)
             fh.close()
 
     def readTranscripts(self):
@@ -149,7 +153,6 @@ class getEpisodeTranscripts:
         with open("all_info.json","w") as fhandle:
                 json.dump(self.allTranscripts,fhandle)
                 fhandle.close()
-
 
 t = getEpisodeTranscripts()
 t.readTranscripts()
