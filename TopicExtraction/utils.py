@@ -77,3 +77,5 @@ if __name__ == "__main__":
 	ldamodel = LdaModel(o4[0], num_topics=3, id2word=o4[1], passes=20)
 
 	print(ldamodel.print_topics(num_topics=3, num_words=3))
+	print(ldamodel.show_topics(num_topics=3, num_words=3, log=False, formatted=True))
+
