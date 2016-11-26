@@ -14,6 +14,6 @@ if __name__ =="__main__":
 	#doc_d = "I often feel pressure to perform well at school, but my mother never seems to drive my brother to do better."
 	#doc_e = "Health professionals say that brocolli is good for your health."
 # compile sample documents into a list
-	doc_set = [doc_b]
+	doc_set = [doc_d]
 
 	print(lda.get_topic(doc_set))
